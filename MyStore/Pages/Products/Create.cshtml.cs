@@ -13,47 +13,46 @@ namespace MyStore.Pages.Products
         {
         }
 
-	public void onPost()
-	{
-		productInfo.name = Request.Form["name"];
-		productInfo.description = Request.Form["description"];
-
-		if(productInfo.name.Length == 0 || productInfo.description.Length == 0)
+		public void onPost()
 		{
-			errorMessage = "All the fields are required";
-			return;
-		}
+			productInfo.name = Request.Form["name"];
+			productInfo.description = Request.Form["description"];
+	
+			if(productInfo.name.Length == 0 || productInfo.description.Length == 0)
+			{
+				errorMessage = "All the fields are required";
+				return;
+			}
 
 		//save the new product into database
-		try
-		{
-			String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
-			using (SqlConnection connection = new SqlConnection(connectionString))
+		/*	try
 			{
-				connection.Open();
-				String sql = "INSERT INTO products " +
-					"(name, description) VALUES " +
-					"(@name, @description);";
-
-				using (SqlCommand command = new SqlCommand(sql, connection))
+				String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
+				using (SqlConnection connection = new SqlConnection(connectionString))
 				{
-					command.Parameters.AddWithValue("@name",productInfo.name);
-					command.Parameters.AddWithValue("@description",productInfo.description);
+					connection.Open();
+					String sql = "INSERT INTO products " +
+						"(name, description) VALUES " +
+						"(@name, @description);";
 
-					command.ExecuteNonQuery();
+					using (SqlCommand command = new SqlCommand(sql, connection))
+					{
+						command.Parameters.AddWithValue("@name",productInfo.name);
+						command.Parameters.AddWithValue("@description",productInfo.description);
+
+						command.ExecuteNonQuery();
+					}
 				}
 			}
-		}
-		catch(Exception ex)
-		{
-			errorMessage = ex.Message;
-			return;
-		}
-		productInfo.name = ""; productInfo.description = "";
-		successMessage = "New Product Added Correctly";
+			catch(Exception ex)
+			{
+				errorMessage = ex.Message;
+				return;
+			} */
+			productInfo.name = ""; productInfo.description = "";
+			successMessage = "New Product Added Correctly";
 
-		Response.Redirect("/Products/Index");
-	}
-
+		//	Response.Redirect("/Products/Index");
+		}
     }
 }

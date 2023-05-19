@@ -38,10 +38,7 @@ namespace MyStore.Pages.Products
 
 		catch (Exception ex)
 		{
-<<<<<<< HEAD
 			Console.WriteLine("Exception:" + ex.ToString());
-=======
->>>>>>> parent of 5a13c9e (fix errors)
 		}
         }
     }

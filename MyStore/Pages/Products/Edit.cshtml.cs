@@ -12,81 +12,78 @@ namespace MyStore.Pages.Products
 
         public void OnGet()
         {
-		String id = Request.Query["id"];
-		try
-		{
-			String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
-			using (SqlConnection connection = new SqlConnection(connectionString))
+			String id = Request.Query["id"];
+			try
 			{
-				connection.Open();
-				String sql = "SELECT * FROM products where id=@id";
-				using (SqlCommand command = new SqlCommand(sql, connection))
+				String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
+				using (SqlConnection connection = new SqlConnection(connectionString))
 				{
-					command.Parameters.AddWithValue("@id",id);
-					using (SqlDataReader reader = command.ExecuteReader())
+					connection.Open();
+					String sql = "SELECT * FROM products WHERE id=@id";
+					using (SqlCommand command = new SqlCommand(sql, connection))
 					{
-						while (reader.Read())
+						command.Parameters.AddWithValue("@id",id);
+						using (SqlDataReader reader = command.ExecuteReader())
 						{
-							productInfo.id = "" + reader.GetInt32(0);
-							productInfo.name = reader.GetString(1);
-							productInfo.description = reader.GetString(2);
-							productInfo.created_at = reader.GetDateTime(3).ToString();
+							while (reader.Read())
+							{
+								productInfo.id = "" + reader.GetInt32(0);
+								productInfo.name = reader.GetString(1);
+								productInfo.description = reader.GetString(2);
+								productInfo.created_at = reader.GetDateTime(3).ToString();
+							}
 						}
 					}
 				}
-
+			}
+			catch(Exception ex)
+			{
+				errorMessage=ex.Message;
+				return;
 			}
 		}
-		catch(Exception ex)
+		public void OnPost()
 		{
-			errorMessage=ex.Message;
-			return;
-		}
+			productInfo.id = Request.Form["id"];
+			productInfo.name = Request.Form["name"];
+			productInfo.description = Request.Form["description"];
+			productInfo.id = Request.Form["id"];
 
-		Response.Redirect("/Products/Index");
-        }
-
-	public void OnPost()
-	{
-		productInfo.id = Request.Form["id"];
-		productInfo.name = Request.Form["name"];
-		productInfo.description = Request.Form["description"];
-		productInfo.id = Request.Form["id"];
-
-		if (productInfo.id.Length == 0 || productInfo.name.Length == 0 || 
+			if (productInfo.id.Length == 0 || productInfo.name.Length == 0 || 
 				productInfo.description.Length == 0)
-		{
-			errorMessage = "All fields are required";
-			return;
-		}
-
-		try
-		{
-			String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
-			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				connection.Open();
-				String sql = "UPDATE products " +
-					"SET name=@name, description=@description " +
-					"WHERE id=@id";
+				errorMessage = "All fields are required";
+				return;
+			}
 
-
-				using (SqlCommand command = new SqlCommand(sql, connection))
+			try
+			{
+				String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
+				using (SqlConnection connection = new SqlConnection(connectionString))
 				{
-					command.Parameters.AddWithValue("@name",productInfo.name);
-					command.Parameters.AddWithValue("@description",productInfo.description);
+					connection.Open();
+					String sql = "UPDATE products " +
+						"SET name=@name, description=@description " +
+						"WHERE id=@id";
 
-					command.ExecuteNonQuery();
+
+					using (SqlCommand command = new SqlCommand(sql, connection))
+					{
+						command.Parameters.AddWithValue("@id",productInfo.id);
+						command.Parameters.AddWithValue("@name",productInfo.name);
+						command.Parameters.AddWithValue("@description",productInfo.description);
+							
+						command.ExecuteNonQuery();
+					}
 				}
 			}
-		}
-		catch (Exception ex)
-		{
-			errorMessage = ex.Message;
-			return;
-		}
+			catch (Exception ex)
+			{
+				errorMessage = ex.Message;
+				return;
+			}
 
-		Response.Redirect("/Products/Index");
-	}
+			Response.Redirect("/Products/Index");
+		}
     }
 }

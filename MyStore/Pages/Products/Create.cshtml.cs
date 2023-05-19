@@ -22,7 +22,7 @@ namespace MyStore.Pages.Products
 			return;
 		}
 
-		//save the new client into database
+		//save the new product into database
 		try
 		{
 			String connectionString = "";

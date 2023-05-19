@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UpToDateCheckInput Remove="Pages\Products\Index.cshtml" />
   </ItemGroup>
 
@@ -23,7 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Products\Index.cshtml" />
+    <Page Include="Pages\Products\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
 </Project>

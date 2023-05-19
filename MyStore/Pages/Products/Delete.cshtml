@@ -1,5 +1,26 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@page
+@using System.Data.SqlClient;
 @{
+try
+		{
+			Sting id=Request.Query["id"];
+
+			String connectionString = "";
+			using (Sqlconnection connection = new Sqlconnection(connectionString))
+			{
+				connection.Open();
+				String sql = "DELETE FROM products WHERE id="@id";
+				using (Sqlcommand command = new Sqlcommand(sql, connection))
+				{
+					command.Parameters.AddWithValue("@id",id);
+
+					command.ExecuteNonQuery();
+			}
+		}
+		catch(Exception ex)
+		{
+		}
+
+		Response.Redirect("/Products/Index");
+		}
 }

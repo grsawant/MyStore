@@ -38,7 +38,6 @@ namespace MyStore.Pages.Products
 
 		catch (Exception ex)
 		{
-				Console.WriteLine("Exception: " + ex.ToString());
 		}
         }
     }

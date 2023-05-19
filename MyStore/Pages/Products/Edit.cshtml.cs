@@ -87,5 +87,6 @@ namespace MyStore.Pages.Products
 		}
 
 		Response.Redirect("/Products/Index");
+	}
     }
 }

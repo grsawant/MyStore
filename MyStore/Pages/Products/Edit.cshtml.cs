@@ -54,9 +54,9 @@ namespace MyStore.Pages.Products
 		productInfo.id = Request.Form["id"];
 
 		if (productInfo.id.Length == 0 || productInfo.name.Length == 0 || 
-				productInfo.description == 0)
+				productInfo.description.Length == 0)
 		{
-			errormessage = "All fields are required";
+			errorMessage = "All fields are required";
 			return;
 		}
 
@@ -80,7 +80,7 @@ namespace MyStore.Pages.Products
 				}
 			}
 		}
-		catch
+		catch (Exception ex)
 		{
 			errorMessage = ex.Message;
 			return;

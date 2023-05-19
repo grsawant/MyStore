@@ -7,6 +7,8 @@ namespace MyStore.Pages.Products
     public class CreateModel : PageModel
     {
 	public ProductInfo productInfo = new ProductInfo();
+	public String errorMessage = "";
+	public String successMessage = "";
         public void OnGet()
         {
         }
@@ -25,7 +27,7 @@ namespace MyStore.Pages.Products
 		//save the new product into database
 		try
 		{
-			String connectionString = "";
+			String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
 			using (Sqlconnection connection = new Sqlconnection(connectionString))
 			{
 				connection.Open();
@@ -39,6 +41,7 @@ namespace MyStore.Pages.Products
 					command.Parameters.AddWithValue("@description",productInfo.description);
 
 					command.ExecuteNonQuery();
+				}
 			}
 		}
 		catch(Exception ex)

@@ -15,7 +15,7 @@ namespace MyStore.Pages.Products
 		String id = Request.Query["id"];
 		try
 		{
-			String connectionString = "";
+			String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
 			using (Sqlconnection connection = new Sqlconnection(connectionString))
 			{
 				connection.Open();

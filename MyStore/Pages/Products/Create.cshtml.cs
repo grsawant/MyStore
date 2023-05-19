@@ -13,7 +13,7 @@ namespace MyStore.Pages.Products
         {
         }
 
-		public void onPost()
+		public void OnPost()
 		{
 			productInfo.name = Request.Form["name"];
 			productInfo.description = Request.Form["description"];
@@ -24,8 +24,7 @@ namespace MyStore.Pages.Products
 				return;
 			}
 
-		//save the new product into database
-		/*	try
+		try
 			{
 				String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
 				using (SqlConnection connection = new SqlConnection(connectionString))
@@ -48,11 +47,11 @@ namespace MyStore.Pages.Products
 			{
 				errorMessage = ex.Message;
 				return;
-			} */
+			}
 			productInfo.name = ""; productInfo.description = "";
 			successMessage = "New Product Added Correctly";
 
-		//	Response.Redirect("/Products/Index");
+			Response.Redirect("/Products/Index");
 		}
     }
 }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.SqlClient;
 
 namespace MyStore.Pages.Products
 {
@@ -36,6 +37,7 @@ namespace MyStore.Pages.Products
 		}
 
 		catch (Exception ex)
+		{
 		}
         }
     }

@@ -26,7 +26,7 @@ namespace MyStore.Pages.Products
 							productInfo.id = "" + reader.GetInt32(0);
 							productInfo.name = reader.GetString(1);
 							productInfo.description = reader.GetString(2);
-							productInfo.created_at = reader.GetString(3);
+							productInfo.created_at = reader.GetDateTime(3).ToString();
 
 							listProducts.Add(productInfo);
 						}

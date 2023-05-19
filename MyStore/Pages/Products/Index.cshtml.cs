@@ -12,11 +12,11 @@ namespace MyStore.Pages.Products
 		try
 		{
 			String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
-			using (Sqlconnection connection = new Sqlconnection(connectionString))
+			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
 				String sql = "SELECT * FROM products";
-				using (Sqlcommand command = new Sqlcommand(sql, connection))
+				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
 					using (SqlDataReader reader = command.ExecuteReader())
 					{

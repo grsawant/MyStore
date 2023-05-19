@@ -28,14 +28,14 @@ namespace MyStore.Pages.Products
 		try
 		{
 			String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
-			using (Sqlconnection connection = new Sqlconnection(connectionString))
+			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
 				String sql = "INSERT INTO products " +
 					"(name, description) VALUES " +
 					"(@name, @description);";
 
-				using (Sqlcommand command = new Sqlcommand(sql, connection))
+				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
 					command.Parameters.AddWithValue("@name",productInfo.name);
 					command.Parameters.AddWithValue("@description",productInfo.description);

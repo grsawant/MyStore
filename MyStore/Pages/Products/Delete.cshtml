@@ -6,11 +6,11 @@ try
 			Sting id=Request.Query["id"];
 
 			String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=mystore;Integrated Security=True";
-			using (Sqlconnection connection = new Sqlconnection(connectionString))
+			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
 				String sql = "DELETE FROM products WHERE id="@id";
-				using (Sqlcommand command = new Sqlcommand(sql, connection))
+				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
 					command.Parameters.AddWithValue("@id",id);
 
